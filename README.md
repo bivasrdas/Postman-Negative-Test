@@ -9,9 +9,9 @@ Export Postman required Collection
 Open NegativeCollectionScript.js
 
 
-Put the path of the collection exported from Postman in the following space in NegativeTestingScript.js
+Put the path of the collection exported from Postman in the following space in NegativeTestCaseGenerator.js
 
 ![image](https://user-images.githubusercontent.com/54957850/192246211-1de36b0e-5075-439e-9014-21ccd5d79d2b.png)
 
 
-Run the file
+Run NegativeTestCaseGenerator.js file
