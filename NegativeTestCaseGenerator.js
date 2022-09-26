@@ -1,4 +1,10 @@
 /*
+Exported Collection from postman is being read here. Collection exported is 'Health_request.json'
+*/
+var jsonData=require('./Health_request.json')
+
+
+/*
 All Negative Scenarios as key value pair for test case generation and test case naming
 key is use for naming and value is used to generate test case
 */
@@ -12,24 +18,20 @@ negative_data=
             "long_string":"fasdkfjjklasdjfkjasdfkj"
         }
 
-
-/*
-Exported Collection from postman is being read here. Collection exported is 'Health_request.json'
-*/
-var jsonData=require('./Health_request.json')
-f_data=Object.assign({},jsonData.item)
+f_data=Object.assign({},jsonData)
 jsonData.item=[]
-var item_array=f_data[0].item
 final_request_item=[]
+APIList=[]
+getAllAPI(f_data.item)
 
 
 /*
 Used to iterate through all request
 */
-for(var i=0;i<item_array.length;i++)
+for(var i=0;i<APIList.length;i++)
 {
-    item_array[i].response=[]
-    singleAPI(item_array[i])
+    APIList[i].response=[]
+    singleAPI(APIList[i])
 }
 // single_API(item_array[1])//change to make complete 
 jsonData.item=final_request_item
@@ -249,4 +251,22 @@ function bodyAddExtraField(item,multi_req)
     temp.request.body.raw=JSON.stringify(temp.request.body.raw)
     temp.name="Extra field"
     multi_req.push(temp)
+}
+/*
+To get list of all API in the given collections
+*/
+
+function getAllAPI(item)
+{
+    for(var i=0;i<item.length;i++)
+    {
+        if(item[i].hasOwnProperty("request"))
+        {
+            APIList.push(item[i])
+        }
+        else
+        {
+            getAllAPI(item[i].item)
+        }
+    }
 }
