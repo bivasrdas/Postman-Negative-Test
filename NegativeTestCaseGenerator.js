@@ -1,7 +1,7 @@
 /*
 Exported Collection from postman is being read here. Collection exported is 'Health_request.json'
 */
-var jsonData=require('./Health_request.json')
+var jsonData=require('./NestedCollections.postman_collection.json')
 
 
 /*
@@ -56,13 +56,19 @@ Used to separate the API which contain body or Parameters
 */
 function parameterBodySeparator(item)
 {
-    if(item.request.url.hasOwnProperty('query'))
+    try{
+        if(item.request.url.hasOwnProperty('query'))
     {
         parameterGenerator(item)
     }
     if(item.request.hasOwnProperty('body'))
     {
         bodyGenerator(item)
+    }
+    }
+    catch(err)
+    {
+        console.log("Error while creating negative test case. Possible cause : Bad Request Format")
     }
 }
 
